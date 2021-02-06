@@ -1,0 +1,10 @@
+{
+  "name": "fa2g-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord bot voor Fa2g server",
+  "main": "index.js",
+  "repository": "https://github.com/danielwierden/fa2g-discord-bot",
+  "author": "Daniel Dabrowski",
+  "license": "MIT",
+  "private": true
+}
