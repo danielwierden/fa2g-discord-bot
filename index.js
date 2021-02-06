@@ -1,6 +1,7 @@
 const Discord = require('discord.js')
 const client = new Discord.Client()
-const token = ''
+
+const token = process.env.TOKEN
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`)
@@ -15,31 +16,31 @@ client.on('message', async msg => {
     }
 })
 
-client.on("voiceStateUpdate", async (oldMember, newMember) => {
-    if (newMember.channelID === '698987936255049768') return
+client.on("voiceStateUpdate", async (oldState, newState) => {
+    if (newState.channelID === '698987936255049768') return
 
-    // console.log(newMember.member.id);
+    // console.log(newState.member.id);
     try {
-        if (oldMember.channelID !== newMember.channelID) {
+        if (oldState.channelID !== newState.channelID) {
 
             // Daniel
-            if (newMember.member.id === '215177142613442570') {
-                await play(newMember.member.voice.channel, 'generic.mp3')
+            if (newState.member.id === '215177142613442570') {
+                await play(newState.member.voice.channel, 'generic.mp3')
             }
 
             // Luuk
-            if (newMember.member.id === '246029303865802769') {
-                await play(newMember.member.voice.channel, 'luuk.mp3')
+            if (newState.member.id === '246029303865802769') {
+                await play(newState.member.voice.channel, 'luuk.mp3')
             }
 
             // Koen
-            if (newMember.member.id === '281861705112354817') {
-                await play(newMember.member.voice.channel, 'koen.mp3')
+            if (newState.member.id === '281861705112354817') {
+                await play(newState.member.voice.channel, 'koen.mp3')
             }
 
             // Lukas
-            if (newMember.member.id === '190561778634194954') {
-                await play(newMember.member.voice.channel, 'lukas.wav')
+            if (newState.member.id === '190561778634194954') {
+                await play(newState.member.voice.channel, 'lukas.wav')
             }
         }
     } catch (e) {
