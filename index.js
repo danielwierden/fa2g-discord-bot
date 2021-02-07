@@ -19,7 +19,7 @@ client.on('message', async msg => {
 client.on("voiceStateUpdate", async (oldState, newState) => {
     if (newState.channelID === '698987936255049768') return
 
-    // console.log(newState.member.id);
+    console.log(newState.member.id);
     try {
         if (oldState.channelID !== newState.channelID) {
 
@@ -45,7 +45,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
             // Jesse
             if (newState.member.id === '138357364418936833') {
-                await play(newState.member.voice.channel, 'generic.mp3')
+                await play(newState.member.voice.channel, 'jesse.mp3')
             }
 
             // Koen
@@ -66,7 +66,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 async function play(voiceChannel, song, volume) {
     try {
         const connection = await voiceChannel.join()
-        const dispatcher = await connection.play(`sounds/${song}`, {
+        await connection.play(`sounds/${song}`, {
             volume: volume || .3,
         })
     } catch (e) {
