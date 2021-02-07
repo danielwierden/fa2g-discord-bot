@@ -25,6 +25,16 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
             // Daniel
             if (newState.member.id === '215177142613442570') {
+                await play(newState.member.voice.channel, 'daniel.mp3', .4)
+            }
+
+            // Sam
+            if (newState.member.id === '186885107733364737') {
+                await play(newState.member.voice.channel, 'generic.mp3', .4)
+            }
+
+            // Crack
+            if (newState.member.id === '302908404802912256') {
                 await play(newState.member.voice.channel, 'generic.mp3')
             }
 
@@ -53,16 +63,12 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     }
 });
 
-async function play(voiceChannel, song) {
+async function play(voiceChannel, song, volume) {
     try {
         const connection = await voiceChannel.join()
         const dispatcher = await connection.play(`sounds/${song}`, {
-            volume: 0.3,
+            volume: volume || .3,
         })
-
-        dispatcher.on('finish', () => {
-            connection.disconnect();
-        });
     } catch (e) {
         console.error(e.message)
     }
