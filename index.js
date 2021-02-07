@@ -33,6 +33,11 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
                 await play(newState.member.voice.channel, 'luuk.mp3')
             }
 
+            // Jesse
+            if (newState.member.id === '138357364418936833') {
+                await play(newState.member.voice.channel, 'generic.mp3')
+            }
+
             // Koen
             if (newState.member.id === '281861705112354817') {
                 await play(newState.member.voice.channel, 'koen.mp3')
