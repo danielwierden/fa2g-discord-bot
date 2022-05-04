@@ -17,6 +17,7 @@
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "ffmpeg-static": "^4.2.7",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "nodemon": "^2.0.16"
   }
 }
