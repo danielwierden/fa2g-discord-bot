@@ -17,6 +17,7 @@ client.on('message', async msg => {
 })
 
 client.on("voiceStateUpdate", async (oldState, newState) => {
+    console.log(newState.member.id);
     try {
         if (oldState.channelID !== newState.channelID) {
             // Daniel
@@ -54,7 +55,8 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
                 await play(newState.member.voice.channel, 'lukas.wav')
             }
 
-            if (newState.channelID === '698987936255049768') {
+            // Ronnie
+            if (newState.channelID === '361098503058882562') {
                 await play(newState.member.voice.channel, 'ronald.mp3')
             }
         }
