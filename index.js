@@ -17,12 +17,8 @@ client.on('message', async msg => {
 })
 
 client.on("voiceStateUpdate", async (oldState, newState) => {
-    if (newState.channelID === '698987936255049768') return
-
-    console.log(newState.member.id);
     try {
         if (oldState.channelID !== newState.channelID) {
-
             // Daniel
             if (newState.member.id === '215177142613442570') {
                 await play(newState.member.voice.channel, 'daniel.mp3', .4)
@@ -56,6 +52,10 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
             // Lukas
             if (newState.member.id === '190561778634194954') {
                 await play(newState.member.voice.channel, 'lukas.wav')
+            }
+
+            if (newState.channelID === '698987936255049768') {
+                await play(newState.member.voice.channel, 'ronald.mp3')
             }
         }
     } catch (e) {
