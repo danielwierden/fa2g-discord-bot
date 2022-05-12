@@ -56,7 +56,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
             }
 
             // Ronnie
-            if (newState.channelID === '361098503058882562') {
+            if (newState.member.id === '361098503058882562') {
                 await play(newState.member.voice.channel, 'ronald.mp3')
             }
         }
