@@ -27,7 +27,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
             // Sam
             if (newState.member.id === '186885107733364737') {
-                await play(newState.member.voice.channel, 'generic.mp3', .4)
+                await play(newState.member.voice.channel, 'sam.ogg', .4)
             }
 
             // Crack
@@ -37,7 +37,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
             // Luuk
             if (newState.member.id === '246029303865802769') {
-                await play(newState.member.voice.channel, 'luuk.mp3')
+                await play(newState.member.voice.channel, 'luuk2.mp3')
             }
 
             // Jesse
