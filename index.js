@@ -47,7 +47,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
             // Koen
             if (newState.member.id === '281861705112354817') {
-                await play(newState.member.voice.channel, 'koen3.ogg')
+                await play(newState.member.voice.channel, 'koen4.mp3')
             }
 
             // Lukas
