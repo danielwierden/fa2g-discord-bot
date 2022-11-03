@@ -22,7 +22,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
         if (oldState.channelID !== newState.channelID) {
             // Daniel
             if (newState.member.id === '215177142613442570') {
-                await play(newState.member.voice.channel, 'kerstBlackie.mp3', .4)
+                await play(newState.member.voice.channel, 'daniel2.mp3', .4)
             }
 
             // Sam
@@ -32,7 +32,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
             // Crack
             if (newState.member.id === '302908404802912256') {
-                await play(newState.member.voice.channel, 'generic.mp3')
+                await play(newState.member.voice.channel, 'kerstBlackie.mp3')
             }
 
             // Luuk
