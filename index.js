@@ -76,4 +76,10 @@ async function play(voiceChannel, song, volume) {
     }
 }
 
+function getRandomSamSound() {
+    const samSounds = ['kerstSam1', 'kerstSam2', 'kerstSam3', 'kerstSam4'];
+
+    return samSounds[Math.floor(Math.random() * samSounds.length)] + '.ogg';
+}
+
 client.login(token)
