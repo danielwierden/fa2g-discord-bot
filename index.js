@@ -27,7 +27,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
             // Sam
             if (newState.member.id === '186885107733364737') {
-                await play(newState.member.voice.channel, 'sam.ogg', .4)
+                await play(newState.member.voice.channel, getRandomSamSound(), .4)
             }
 
             // Crack
