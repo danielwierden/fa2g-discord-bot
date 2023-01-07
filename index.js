@@ -27,12 +27,12 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
             // Sam
             if (newState.member.id === '186885107733364737') {
-                await play(newState.member.voice.channel, getRandomSamSound(), .4)
+                await play(newState.member.voice.channel, 'sam.ogg', .4)
             }
 
             // Crack
             if (newState.member.id === '302908404802912256') {
-                await play(newState.member.voice.channel, 'kerstBlackie.mp3')
+                await play(newState.member.voice.channel, 'blackieKoffie.mp3')
             }
 
             // Luuk
