@@ -59,7 +59,7 @@ async function play(voiceChannel: VoiceBasedChannel, song: string, volume = .3):
         resource.volume?.setVolume(volume);
 
         player.play(resource);
-    } catch (e) {
+    } catch (e: any) {
         console.error(e.message);
     }
 }
