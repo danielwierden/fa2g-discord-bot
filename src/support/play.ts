@@ -16,8 +16,9 @@ export default async (voiceChannel: VoiceBasedChannel, song: string, volume = .3
 
         player.play(resource);
 
-        player.on(AudioPlayerStatus.Idle || AudioPlayerStatus.Paused, () => {
+        player.on(AudioPlayerStatus.Idle, () => {
             connection.destroy();
+            player.stop();
         });
     } catch (e: any) {
         voiceChannel.send(`Er is een fout opgetreden: ${e.message}`);
