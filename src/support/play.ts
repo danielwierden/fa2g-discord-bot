@@ -17,6 +17,7 @@ export default async (voiceChannel: VoiceBasedChannel, song: string, volume = .3
         player.play(resource);
 
         player.on(AudioPlayerStatus.Idle, () => {
+            connection.disconnect();
             connection.destroy();
             player.stop();
         });
