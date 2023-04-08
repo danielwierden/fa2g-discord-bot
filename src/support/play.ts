@@ -20,6 +20,6 @@ export default async (voiceChannel: VoiceBasedChannel, song: string, volume = .3
             connection.destroy();
         });
     } catch (e: any) {
-        console.error(e.message);
+        voiceChannel.send(`Er is een fout opgetreden: ${e.message}`);
     }
 }
