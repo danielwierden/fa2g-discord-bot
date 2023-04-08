@@ -1,5 +1,5 @@
 import type { VoiceBasedChannel } from "discord.js";
-import { createAudioPlayer, createAudioResource } from "@discordjs/voice";
+import { AudioPlayerStatus, createAudioPlayer, createAudioResource } from "@discordjs/voice";
 import connectToChannel from "./connectToChannel";
 
 export default async (voiceChannel: VoiceBasedChannel, song: string, volume = .3, ) => {
@@ -16,7 +16,7 @@ export default async (voiceChannel: VoiceBasedChannel, song: string, volume = .3
 
         player.play(resource);
 
-        player.once('idle', () => {
+        player.on(AudioPlayerStatus.Idle, () => {
             connection.destroy();
         });
     } catch (e: any) {
