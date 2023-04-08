@@ -1,13 +1,12 @@
 import type { VoiceBasedChannel } from "discord.js";
-import { AudioPlayer, createAudioResource, joinVoiceChannel } from "@discordjs/voice";
+import { createAudioPlayer, createAudioResource } from "@discordjs/voice";
+import connectToChannel from "./connectToChannel";
 
-export default async (player: AudioPlayer, voiceChannel: VoiceBasedChannel, song: string, volume = .3, ) => {
+export default async (voiceChannel: VoiceBasedChannel, song: string, volume = .3, ) => {
     try {
-        const connection = await joinVoiceChannel({
-            channelId     : voiceChannel.id,
-            guildId       : voiceChannel.guild.id,
-            adapterCreator: voiceChannel.guild.voiceAdapterCreator,
-        });
+        const player = createAudioPlayer();
+
+        const connection = await connectToChannel(voiceChannel);
 
         connection.subscribe(player);
 
@@ -16,6 +15,10 @@ export default async (player: AudioPlayer, voiceChannel: VoiceBasedChannel, song
         resource.volume?.setVolume(volume);
 
         player.play(resource);
+
+        player.once('idle', () => {
+            connection.destroy();
+        });
     } catch (e: any) {
         console.error(e.message);
     }

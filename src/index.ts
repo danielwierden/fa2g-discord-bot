@@ -1,7 +1,6 @@
 import * as dotenv from 'dotenv';
 import { Client, Events, GatewayIntentBits } from "discord.js";
 import axios from "axios";
-import { createAudioPlayer } from "@discordjs/voice";
 import play from "./support/play";
 
 dotenv.config();
@@ -15,12 +14,10 @@ const client = new Client({
     ],
 });
 
-const player = createAudioPlayer();
-
 axios.defaults.baseURL = process.env.API_URL;
 
 client.on(Events.ClientReady, c => {
-    console.log(`Ready! Logged in as ${c.user.tag} on ${c.guilds.cache.size} guilds}`);
+    console.log(`Ready! Logged in as ${c.user.tag} on ${c.guilds.cache.size} guilds`);
 });
 
 client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
@@ -33,7 +30,7 @@ client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
         } catch {
             audioFile = 'sounds/generic.mp3'
         } finally {
-            await play(player, newState.member.voice.channel, audioFile);
+            await play(newState.member.voice.channel, audioFile);
         }
     }
 });
