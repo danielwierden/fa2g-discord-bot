@@ -1,27 +1,39 @@
 import * as dotenv from 'dotenv';
 import { Client, Events, GatewayIntentBits, VoiceBasedChannel } from "discord.js";
 import axios from "axios";
-import { joinVoiceChannel } from "@discordjs/voice";
+import { createAudioPlayer, createAudioResource, joinVoiceChannel } from "@discordjs/voice";
 
 dotenv.config();
 
-const client = new Client({intents: [GatewayIntentBits.Guilds]});
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.MessageContent,
+    ],
+});
+
+const player = createAudioPlayer();
+
 const token = process.env.TOKEN;
 
 axios.defaults.baseURL = process.env.API_URL;
 
-client.once(Events.ClientReady, c => {
+client.on(Events.ClientReady, c => {
     console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
 client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
     if (oldState.channelId !== newState.channelId) {
-        if (newState.member.id === '322078390989488138') return;
+        if (newState.member.id === client.user.id) {
+            return;
+        }
 
         let audioFile;
 
         try {
-            const {data: {data}} = await axios.get(`/api/discord-users/${newState.member.id}`);
+            const { data: { data } } = await axios.get(`/api/discord-users/${newState.member.id}`);
             audioFile = data.audio_file;
         } catch {
             audioFile = 'sounds/generic.mp3'
@@ -31,19 +43,25 @@ client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
     }
 });
 
-async function play(voiceChannel: VoiceBasedChannel, song: string, volume: number = .3): Promise<void> {
+async function play(voiceChannel: VoiceBasedChannel, song: string, volume = .3): Promise<void> {
+    console.log('playing')
     try {
         const connection = await joinVoiceChannel({
-            channelId: voiceChannel.id,
-            guildId: voiceChannel.guild.id,
+            channelId     : voiceChannel.id,
+            guildId       : voiceChannel.guild.id,
             adapterCreator: voiceChannel.guild.voiceAdapterCreator,
         });
-        // await connection.play(`${song}`, {
-        //     volume: volume || .3,
-        // });
+
+        connection.subscribe(player);
+
+        const resource = createAudioResource(song, { inlineVolume: true });
+
+        resource.volume?.setVolume(volume);
+
+        player.play(resource);
     } catch (e) {
         console.error(e.message);
     }
 }
 
-client.login(token);
+void client.login(token);
