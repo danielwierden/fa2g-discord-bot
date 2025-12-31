@@ -1,9 +1,0 @@
-{
-  "apps": [
-    {
-      "name": "Fa2g Discord bot",
-      "script": "npm",
-      "args": "start"
-    }
-  ]
-}
