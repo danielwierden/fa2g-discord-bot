@@ -87,18 +87,27 @@ client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
         where: eq(discordUsersTable.discordId, newState.member?.id as string),
     });
 
-    if (!user) return;
+    let sound;
 
-    const soundFilePath = user.soundFilePath;
+    if (user) {
+        const soundFilePath = user.soundFilePath;
 
-    if (!soundFilePath) return;
+        if (!soundFilePath) return;
 
-    const sound = await s3Client.send(
-        new GetObjectCommand({
-            Bucket: s3Bucket,
-            Key: soundFilePath,
-        }),
-    );
+        sound = await s3Client.send(
+            new GetObjectCommand({
+                Bucket: s3Bucket,
+                Key: soundFilePath,
+            }),
+        );
+    } else {
+        sound = await s3Client.send(
+            new GetObjectCommand({
+                Bucket: s3Bucket,
+                Key: 'sounds_generic.mp3',
+            }),
+        );
+    }
 
     await handleJoinSoundPlay(newState.channel as VoiceBasedChannel, sound);
 });
