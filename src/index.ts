@@ -1,3 +1,9 @@
+// Configure FFmpeg path - use ffmpeg-static if system FFmpeg is not available
+import ffmpegStatic from 'ffmpeg-static';
+if (ffmpegStatic && !process.env.FFMPEG_PATH) {
+    process.env.FFMPEG_PATH = ffmpegStatic;
+}
+
 import { GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import {
     Attachment,
