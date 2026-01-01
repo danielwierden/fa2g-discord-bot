@@ -19,7 +19,7 @@ export const handleJoinSoundPlay = async (channel: VoiceBasedChannel, sound: Get
 
         const resource = createAudioResource(sound.Body as Readable, { inlineVolume: true });
 
-        resource.volume?.setVolume(0.3);
+        resource.volume?.setVolume(0.1);
 
         player.play(resource);
 
