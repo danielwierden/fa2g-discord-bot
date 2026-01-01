@@ -1,6 +1,7 @@
-import type { VoiceBasedChannel } from 'discord.js';
-import { AudioPlayerStatus, createAudioPlayer, createAudioResource, entersState, joinVoiceChannel, VoiceConnectionStatus } from '@discordjs/voice';
 import type { GetObjectCommandOutput } from '@aws-sdk/client-s3';
+import { AudioPlayerStatus, createAudioPlayer, createAudioResource, entersState, joinVoiceChannel, VoiceConnectionStatus } from '@discordjs/voice';
+import type { VoiceBasedChannel } from 'discord.js';
+import type { Readable } from 'node:stream';
 
 export const handleJoinSoundPlay = async (channel: VoiceBasedChannel, sound: GetObjectCommandOutput) => {
     const connection = joinVoiceChannel({
@@ -16,9 +17,9 @@ export const handleJoinSoundPlay = async (channel: VoiceBasedChannel, sound: Get
 
         connection.subscribe(player);
 
-        const resource = createAudioResource(sound.Body as ReadableStream);
+        const resource = createAudioResource(sound.Body as Readable);
 
-        resource.volume?.setVolume(0.3);
+        resource.volume?.setVolume(0.15);
 
         player.play(resource);
 

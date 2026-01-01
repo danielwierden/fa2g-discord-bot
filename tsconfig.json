@@ -14,7 +14,7 @@
         "rootDir": "./src",
         "noEmit": true,
         "types": ["node"],
-        "allowImportingTsExtensions": true,
+        "allowImportingTsExtensions": false,
         "verbatimModuleSyntax": true,
         "incremental": true,
         "useDefineForClassFields": true,
